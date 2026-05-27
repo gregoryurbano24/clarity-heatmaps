@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microsoft Clarity Heatmaps Project Guidebook | Mercedes-Benz Stadium</title>
+<style>
+:root{--bg:#0f172a;--panel:#111827;--card:#ffffff;--ink:#1f2937;--muted:#6b7280;--line:#e5e7eb;--accent:#2563eb;--accent2:#0ea5e9;--ok:#16a34a;--warn:#f59e0b;--danger:#dc2626;--soft:#f8fafc;}
+*{box-sizing:border-box} body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#f3f4f6;color:var(--ink);line-height:1.55} a{color:var(--accent)}
+header{background:linear-gradient(135deg,var(--bg),#1e3a8a);color:white;padding:34px 42px} header h1{margin:0;font-size:32px;line-height:1.15} header p{margin:10px 0 0;color:#dbeafe;max-width:1100px}.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.pill{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);padding:6px 10px;border-radius:999px;font-size:13px}
+.layout{display:grid;grid-template-columns:310px 1fr;min-height:calc(100vh - 160px)}nav{background:#fff;border-right:1px solid var(--line);padding:22px;position:sticky;top:0;height:100vh;overflow:auto}nav h2{font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 12px}nav a{display:block;text-decoration:none;color:#374151;padding:8px 10px;border-radius:8px;font-size:14px}nav a:hover{background:#eff6ff;color:#1d4ed8}.progressBox{background:#f9fafb;border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:18px}.bar{height:10px;border-radius:999px;background:#e5e7eb;overflow:hidden}.bar span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--ok),var(--accent2))}.small{font-size:12px;color:var(--muted)}
+main{padding:28px 42px 80px;max-width:1260px}section{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;margin:0 0 22px;box-shadow:0 1px 2px rgba(0,0,0,.04)}h2{margin:0 0 14px;font-size:24px}h3{margin:24px 0 10px;font-size:18px}h4{margin:18px 0 8px}.callout{background:#eff6ff;border-left:5px solid var(--accent);padding:14px 16px;border-radius:10px;margin:14px 0}.warn{background:#fffbeb;border-left-color:var(--warn)}.done{background:#ecfdf5;border-left-color:var(--ok)}
+table{width:100%;border-collapse:collapse;margin:12px 0 18px;font-size:14px}th,td{border:1px solid var(--line);padding:9px 10px;vertical-align:top}th{background:#f9fafb;text-align:left}tr:nth-child(even) td{background:#fcfcfd}.checklist label{display:flex;gap:10px;padding:7px 8px;border:1px solid #eef2f7;border-radius:10px;margin:6px 0;background:#fff}.checklist input{margin-top:4px;min-width:16px}.owner{font-weight:600}.tag{display:inline-block;background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe;border-radius:999px;padding:2px 7px;font-size:12px}.p0{background:#fee2e2;color:#991b1b;border-color:#fecaca}.p1{background:#fef3c7;color:#92400e;border-color:#fde68a}.p2{background:#e0f2fe;color:#075985;border-color:#bae6fd}textarea,input[type=text],select{width:100%;padding:8px;border:1px solid #d1d5db;border-radius:8px}textarea{min-height:90px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{border:1px solid var(--line);background:var(--soft);border-radius:14px;padding:15px}.refs li{margin-bottom:8px}.print{position:fixed;right:18px;bottom:18px;background:#111827;color:white;border:0;border-radius:999px;padding:12px 16px;box-shadow:0 8px 28px rgba(0,0,0,.2);cursor:pointer}
+@media(max-width:900px){.layout{display:block}nav{position:relative;height:auto}.grid2,.grid3{grid-template-columns:1fr}main{padding:18px}header{padding:24px}}
+@media print{nav,.print{display:none}.layout{display:block}section{break-inside:avoid;box-shadow:none}body{background:white}header{background:white;color:#111;border-bottom:1px solid #ddd}.pill{color:#111;border-color:#ddd;background:#fff}}
+</style>
+</head>
+<body>
+<header>
+<h1>Microsoft Clarity Heatmaps Project Guidebook<br>Mercedes-Benz Stadium Website</h1>
+<p>A start-to-finish operating guide for implementing Microsoft Clarity heatmaps, reviewing fan behavior, documenting findings, and turning insights into measurable website improvements.</p>
+<div class="meta">
+<span class="pill">Website: https://www.mercedesbenzstadium.com/</span>
+<span class="pill">Project Owner: Gregory Urbano</span>
+<span class="pill">UX/Product Lead: Roshni Hariharan</span>
+<span class="pill">Technical Lead: Johnny Goulbourne</span>
+<span class="pill">Created: May 27, 2026</span>
+</div>
+</header>
+<div class="layout">
+<nav>
+<div class="progressBox">
+<h2>Guidebook Progress</h2>
+<div class="bar"><span id="bar"></span></div>
+<p class="small"><span id="doneCount">0</span> of <span id="totalCount">0</span> tasks completed. Checkboxes save in this browser.</p>
+<button onclick="clearChecks()" style="width:100%;padding:8px;border:1px solid #d1d5db;background:white;border-radius:8px;cursor:pointer">Reset checkboxes</button>
+</div>
+<h2>Contents</h2>
+<a href="#purpose">1. Purpose</a>
+<a href="#roles">2. Roles</a>
+<a href="#inventory">3. URL Inventory</a>
+<a href="#phase0">4. Phase 0 — Kickoff</a>
+<a href="#phase1">5. Phase 1 — Governance</a>
+<a href="#phase2">6. Phase 2 — Setup</a>
+<a href="#phase3">7. Phase 3 — Install & Validate</a>
+<a href="#phase4">8. Phase 4 — Measurement Framework</a>
+<a href="#phase5">9. Phase 5 — Segments & Tags</a>
+<a href="#phase6">10. Phase 6 — Heatmap Review</a>
+<a href="#phase7">11. Phase 7 — Prioritize</a>
+<a href="#phase8">12. Phase 8 — Implement</a>
+<a href="#phase9">13. Phase 9 — Validate</a>
+<a href="#pages">14. Page Review Guides</a>
+<a href="#evidence">15. Evidence Log</a>
+<a href="#refs">16. Sources</a>
+</nav>
+<main>
+<section id="purpose">
+<h2>1. Purpose and success criteria</h2>
+<div class="callout">This guidebook is designed to be used directly by Roshni Hariharan and Johnny Goulbourne. Check off tasks as they are completed, add notes in the evidence log, and use the tracker tables to show completed work.</div>
+<p><strong>Project objective:</strong> implement and operationalize Microsoft Clarity heatmaps for the Mercedes-Benz Stadium website so the team can understand how fans use critical event-day pages and improve the site based on real behavior.</p>
+<div class="grid3">
+<div class="card"><h3>Fan impact</h3><p>Help fans quickly find parking, directions, accessibility, bag policy, stadium maps, food and beverage, app, and event information.</p></div>
+<div class="card"><h3>Team impact</h3><p>Create a repeatable review process that turns observations into prioritized website tasks.</p></div>
+<div class="card"><h3>Leadership impact</h3><p>Maintain a visible record of what was reviewed, what was improved, and what still needs action.</p></div>
+</div>
+<h3>Deliverables</h3>
+<div class="checklist">
+<label><input type="checkbox">Microsoft Clarity project exists for Mercedes-Benz Stadium.</label>
+<label><input type="checkbox">Clarity tracking is installed and validated on approved priority pages.</label>
+<label><input type="checkbox">Privacy, consent, and exclusion rules are documented.</label>
+<label><input type="checkbox">Priority URL inventory is finalized.</label>
+<label><input type="checkbox">Segments and custom tags are created or intentionally deferred.</label>
+<label><input type="checkbox">First heatmap review is completed for all P0 pages.</label>
+<label><input type="checkbox">Findings are documented with screenshots or shared heatmap links.</label>
+<label><input type="checkbox">High-priority site improvements are assigned and tracked.</label>
+<label><input type="checkbox">Before/after validation is completed after updates go live.</label>
+</div>
+</section>
+
+<section id="roles">
+<h2>2. Roles and responsibilities</h2>
+<table><tr><th>Person</th><th>Role</th><th>Responsibilities</th><th>Completion markers</th></tr>
+<tr><td class="owner">Gregory Urbano</td><td>Project owner / approver</td><td>Confirm scope, approve priority pages, review major recommendations, use output for leadership updates.</td><td><input type="checkbox"> Scope approved<br><input type="checkbox"> Recommendations reviewed</td></tr>
+<tr><td class="owner">Roshni Hariharan</td><td>UX/Product lead</td><td>Own UX review framework, analyze heatmaps, identify layout/content/accessibility opportunities, prioritize recommendations.</td><td><input type="checkbox"> Framework complete<br><input type="checkbox"> Findings reviewed</td></tr>
+<tr><td class="owner">Johnny Goulbourne</td><td>Technical implementation lead</td><td>Implement and validate Clarity script, coordinate Webflow/tag changes, add approved custom tags, capture evidence.</td><td><input type="checkbox"> Script validated<br><input type="checkbox"> Technical evidence added</td></tr>
+</table>
+<div class="callout">Internal context: AMBSE materials identify mercedesbenzstadium.com as a managed digital property and Webflow as the platform used to manage and maintain the MBS website. Roshni is identified internally with UX/UI, personalization, and accessibility responsibilities, with Johnny supporting website and mobile app functionality.</div>
+</section>
+
+<section id="inventory">
+<h2>3. Priority URL inventory</h2>
+<p>Use this as the working source of truth. Do not add or remove pages without recording the reason.</p>
+<table><tr><th>Priority</th><th>Page</th><th>Full URL</th><th>Fan task</th><th>Status</th></tr>
+<tr><td><span class="tag p0">P0</span></td><td>Homepage</td><td><a href="https://www.mercedesbenzstadium.com/">https://www.mercedesbenzstadium.com/</a></td><td>Find events, tickets, parking, menus, accessibility, and stadium information.</td><td><input type="checkbox"> Reviewed</td></tr>
+<tr><td><span class="tag p0">P0</span></td><td>Event detail example</td><td><a href="https://www.mercedesbenzstadium.com/events/fifa-world-cup-26-tm---spain-vs-saudi-arabia">https://www.mercedesbenzstadium.com/events/fifa-world-cup-26-tm---spain-vs-saudi-arabia</a></td><td>Prepare for a specific event.</td><td><input type="checkbox"> Reviewed</td></tr>
+<tr><td><span class="tag p0">P0</span></td><td>Parking and Transportation</td><td><a href="https://www.mercedesbenzstadium.com/parking-and-transportation">https://www.mercedesbenzstadium.com/parking-and-transportation</a></td><td>Choose arrival/departure plan.</td><td><input type="checkbox"> Reviewed</td></tr>
+<tr><td><span class="tag p0">P0</span></td><td>Stadium Maps</td><td><a href="https://www.mercedesbenzstadium.com/stadium-maps">https://www.mercedesbenzstadium.com/stadium-maps</a></td><td>Open map, find concourse, parking, accessibility, and location guidance.</td><td><input type="checkbox"> Reviewed</td></tr>
+<tr><td><span class="tag p0">P0</span></td><td>Fan Guidelines</td><td><a href="https://www.mercedesbenzstadium.com/guidelines">https://www.mercedesbenzstadium.com/guidelines</a></td><td>Understand bag policy, code of conduct, evacuation, and accessibility info.</td><td><input type="checkbox"> Reviewed</td></tr>
+<tr><td><span class="tag p0">P0</span></td><td>Accessibility Services</td><td><a href="https://www.mercedesbenzstadium.com/accessibility">https://www.mercedesbenzstadium.com/accessibility</a></td><td>Find ADA/mobility support, contact paths, seating, relocations, storage, and parking info.</td><td><input type="checkbox"> Reviewed</td></tr>
+<tr><td><span class="tag p0">P0</span></td><td>All Vendors</td><td><a href="https://www.mercedesbenzstadium.com/all-vendors">https://www.mercedesbenzstadium.com/all-vendors</a></td><td>Search food, beverage, vendor, section, and menu options.</td><td><input type="checkbox"> Reviewed</td></tr>
+<tr><td><span class="tag p0">P0</span></td><td>Mobile Apps</td><td><a href="https://www.mercedesbenzstadium.com/mobile-apps">https://www.mercedesbenzstadium.com/mobile-apps</a></td><td>Download Falcons, Atlanta United, or MBS app.</td><td><input type="checkbox"> Reviewed</td></tr>
+<tr><td><span class="tag p1">P1</span></td><td>MBS Express</td><td><a href="https://www.mercedesbenzstadium.com/mbs-express">https://www.mercedesbenzstadium.com/mbs-express</a></td><td>Understand biometric entry/payment experiences and start registration.</td><td><input type="checkbox"> Reviewed</td></tr>
+<tr><td><span class="tag p1">P1</span></td><td>Delta Fly-Through Lanes</td><td><a href="https://www.mercedesbenzstadium.com/labs/delta-fly-through-lanes">https://www.mercedesbenzstadium.com/labs/delta-fly-through-lanes</a></td><td>Understand and enroll in touchless stadium entry.</td><td><input type="checkbox"> Reviewed</td></tr>
+<tr><td><span class="tag p1">P1</span></td><td>A-Z Guide</td><td><a href="https://www.mercedesbenzstadium.com/a-to-z-guide-copy">https://www.mercedesbenzstadium.com/a-to-z-guide-copy</a></td><td>Find policy and stadium information by topic.</td><td><input type="checkbox"> Reviewed</td></tr>
+<tr><td><span class="tag p1">P1</span></td><td>Concourse 200 example</td><td><a href="https://www.mercedesbenzstadium.com/concourse/200">https://www.mercedesbenzstadium.com/concourse/200</a></td><td>Review concourse-specific food and beverage behavior.</td><td><input type="checkbox"> Reviewed</td></tr>
+<tr><td><span class="tag p0">P0</span></td><td>Privacy Policy</td><td><a href="https://www.mercedesbenzstadium.com/privacy-policy">https://www.mercedesbenzstadium.com/privacy-policy</a></td><td>Confirm privacy disclosure scope and data-use governance.</td><td><input type="checkbox"> Reviewed</td></tr>
+<tr><td><span class="tag p1">P1</span></td><td>Parking vendor site</td><td><a href="https://parking.mercedesbenzstadium.com/">https://parking.mercedesbenzstadium.com/</a></td><td>Determine whether subdomain is in scope and governed separately.</td><td><input type="checkbox"> Scope decided</td></tr>
+</table>
+</section>
+
+<section id="phase0"><h2>4. Phase 0 — Kickoff and scope alignment</h2>
+<div class="checklist">
+<label><input type="checkbox">Create the project record in Monday.com or the team’s approved project tracker.</label>
+<label><input type="checkbox">Attach or link this guidebook in the project record.</label>
+<label><input type="checkbox">Confirm scope: main domain only vs. subdomains.</label>
+<label><input type="checkbox">Confirm whether Spanish-language pages are in scope.</label>
+<label><input type="checkbox">Confirm whether event detail templates are in scope.</label>
+<label><input type="checkbox">Confirm whether third-party embedded experiences are in scope.</label>
+<label><input type="checkbox">Confirm P0 and P1 page list with Gregory.</label>
+<label><input type="checkbox">Document blockers and approvals needed.</label>
+</div>
+<table><tr><th>Decision</th><th>Owner</th><th>Final answer</th><th>Date</th></tr>
+<tr><td>Main domain only or subdomains?</td><td>Gregory</td><td><input type="text"></td><td><input type="text"></td></tr>
+<tr><td>Spanish pages included?</td><td>Gregory</td><td><input type="text"></td><td><input type="text"></td></tr>
+<tr><td>Parking vendor included?</td><td>Gregory / Legal / Vendor owner</td><td><input type="text"></td><td><input type="text"></td></tr>
+<tr><td>Event templates included?</td><td>Roshni</td><td><input type="text"></td><td><input type="text"></td></tr>
+</table>
+</section>
+
+<section id="phase1"><h2>5. Phase 1 — Governance, privacy, and consent</h2>
+<div class="callout warn">Do not expand Clarity implementation until governance questions are answered. Clarity should not be used on sites/apps targeting users under age 18 per Microsoft’s Clarity overview.</div>
+<div class="checklist">
+<label><input type="checkbox">Review current Privacy Policy page.</label>
+<label><input type="checkbox">Confirm whether behavioral analytics and heatmap/session-recording language is already covered.</label>
+<label><input type="checkbox">Confirm whether cookie consent rules permit Clarity tracking.</label>
+<label><input type="checkbox">Confirm whether Clarity should fire only after consent.</label>
+<label><input type="checkbox">Identify pages to exclude from Clarity.</label>
+<label><input type="checkbox">Confirm whether forms, payment flows, login/account flows, and vendor experiences should be excluded or masked.</label>
+<label><input type="checkbox">Document privacy approval owner.</label>
+<label><input type="checkbox">Document consent manager owner.</label>
+</div>
+<h3>Governance notes</h3><textarea placeholder="Add approvals, exclusions, masking requirements, or consent notes here."></textarea>
+</section>
+
+<section id="phase2"><h2>6. Phase 2 — Microsoft Clarity project setup</h2>
+<div class="checklist">
+<label><input type="checkbox">Confirm whether a Clarity project already exists for the MBS site.</label>
+<label><input type="checkbox">If existing, confirm project owner and current users.</label>
+<label><input type="checkbox">If new, create project named “Mercedes-Benz Stadium Website.”</label>
+<label><input type="checkbox">Set website URL to https://www.mercedesbenzstadium.com/.</label>
+<label><input type="checkbox">Add Gregory, Roshni, and Johnny as users with appropriate permissions.</label>
+<label><input type="checkbox">Copy project ID into approved secure internal documentation.</label>
+<label><input type="checkbox">Select implementation method: Webflow global code, tag manager, or page-specific code.</label>
+<label><input type="checkbox">Document the selected method below.</label>
+</div>
+<table><tr><th>Implementation method</th><th>Use case</th><th>Selected?</th><th>Notes</th></tr>
+<tr><td>Webflow global code</td><td>Use if the team deploys directly through Webflow site settings.</td><td><input type="checkbox"></td><td><input type="text"></td></tr>
+<tr><td>Tag manager</td><td>Use if the team needs centralized governance and consent rules.</td><td><input type="checkbox"></td><td><input type="text"></td></tr>
+<tr><td>Page-specific code</td><td>Use for controlled testing or limited pilot only.</td><td><input type="checkbox"></td><td><input type="text"></td></tr>
+<tr><td>Defer deployment</td><td>Use if privacy/consent review is incomplete.</td><td><input type="checkbox"></td><td><input type="text"></td></tr>
+</table>
+</section>
+
+<section id="phase3"><h2>7. Phase 3 — Install and validate tracking</h2>
+<h3>Pre-install checklist</h3><div class="checklist">
+<label><input type="checkbox">Confirm production vs. staging implementation path.</label>
+<label><input type="checkbox">Confirm excluded pages and paths.</label>
+<label><input type="checkbox">Confirm consent behavior before publishing.</label>
+<label><input type="checkbox">Confirm who has publish permission.</label>
+<label><input type="checkbox">Confirm rollback plan.</label>
+</div>
+<h3>Technical checklist for Johnny</h3><div class="checklist">
+<label><input type="checkbox">Retrieve Clarity tracking code from the Clarity project settings.</label>
+<label><input type="checkbox">Add tracking code using the approved method.</label>
+<label><input type="checkbox">If using Webflow, document whether the script is global or page-specific.</label>
+<label><input type="checkbox">If using tag manager, document tag name, trigger, consent rule, and version.</label>
+<label><input type="checkbox">Publish through approved workflow.</label>
+<label><input type="checkbox">Confirm site loads normally after deployment.</label>
+<label><input type="checkbox">Confirm Clarity begins receiving page activity.</label>
+<label><input type="checkbox">Confirm excluded pages are not tracked.</label>
+</div>
+<h3>Validation table</h3>
+<table><tr><th>URL</th><th>Tracking confirmed?</th><th>Heatmap visible?</th><th>Notes</th></tr>
+<tr><td>https://www.mercedesbenzstadium.com/</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text"></td></tr>
+<tr><td>https://www.mercedesbenzstadium.com/parking-and-transportation</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text"></td></tr>
+<tr><td>https://www.mercedesbenzstadium.com/stadium-maps</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text"></td></tr>
+<tr><td>https://www.mercedesbenzstadium.com/guidelines</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text"></td></tr>
+<tr><td>https://www.mercedesbenzstadium.com/accessibility</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text"></td></tr>
+<tr><td>https://www.mercedesbenzstadium.com/all-vendors</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text"></td></tr>
+<tr><td>https://www.mercedesbenzstadium.com/mobile-apps</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text"></td></tr>
+<tr><td>https://www.mercedesbenzstadium.com/mbs-express</td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text"></td></tr>
+</table>
+</section>
+
+<section id="phase4"><h2>8. Phase 4 — Measurement framework</h2>
+<p>Review each page based on the fan task it is meant to support. Do not just look for “hot” areas; evaluate whether the heatmap confirms successful behavior or reveals friction.</p>
+<table><tr><th>Page</th><th>Primary fan task</th><th>Primary questions</th><th>Heatmap types</th></tr>
+<tr><td>Homepage</td><td>Find event and utility paths</td><td>Are fans selecting event details, parking, menus, accessibility, or tickets?</td><td>Click, scroll, attention</td></tr>
+<tr><td>Event detail</td><td>Prepare for event</td><td>Are fans reaching parking, bag policy, accessibility, gates, and KBYG info?</td><td>Click, scroll, area</td></tr>
+<tr><td>Parking</td><td>Choose arrival/departure method</td><td>Are fans selecting MARTA, car, rideshare, parking, maps, and rules?</td><td>Click, scroll, area</td></tr>
+<tr><td>Stadium Maps</td><td>Find location guidance</td><td>Are fans opening the map and using concourse/drop-off/map links?</td><td>Click, area</td></tr>
+<tr><td>Accessibility</td><td>Find ADA/mobility support</td><td>Are guests finding help, seating, parking, device storage, and contact paths?</td><td>Click, scroll, attention</td></tr>
+<tr><td>All Vendors</td><td>Find food and beverage</td><td>Are fans using search, filters, vendor cards, section numbers, and View Menu links?</td><td>Click, area, attention</td></tr>
+<tr><td>Mobile Apps</td><td>Download app</td><td>Are fans choosing the correct app and app store?</td><td>Click, scroll</td></tr>
+<tr><td>MBS Express</td><td>Register for frictionless experiences</td><td>Are fans selecting enrollment actions or reading trust/FAQ content first?</td><td>Click, scroll, attention</td></tr>
+</table>
+<div class="checklist">
+<label><input type="checkbox">Review mobile first for every P0 page.</label>
+<label><input type="checkbox">Review desktop second.</label>
+<label><input type="checkbox">Do not combine mobile and desktop findings unless behavior is consistent.</label>
+<label><input type="checkbox">Document page intent before interpreting the heatmap.</label>
+</div>
+</section>
+
+<section id="phase5"><h2>9. Phase 5 — Segments and custom tags</h2>
+<h3>Recommended saved segments</h3>
+<table><tr><th>Segment</th><th>Purpose</th><th>Owner</th><th>Status</th></tr>
+<tr><td>Mobile event-day users</td><td>Review high-utility pages on mobile.</td><td>Roshni</td><td><input type="checkbox"> Created</td></tr>
+<tr><td>Event detail visitors</td><td>Review behavior on /events/ pages.</td><td>Roshni</td><td><input type="checkbox"> Created</td></tr>
+<tr><td>Parking journey</td><td>Review parking and transportation behavior.</td><td>Roshni</td><td><input type="checkbox"> Created</td></tr>
+<tr><td>Accessibility journey</td><td>Review ADA/mobility page behavior.</td><td>Roshni</td><td><input type="checkbox"> Created</td></tr>
+<tr><td>Food and beverage journey</td><td>Review All Vendors and concourse behavior.</td><td>Roshni</td><td><input type="checkbox"> Created</td></tr>
+<tr><td>MBS Express journey</td><td>Review MBS Express and Delta Fly-Through pages.</td><td>Johnny</td><td><input type="checkbox"> Created</td></tr>
+</table>
+<h3>Custom tags to consider</h3>
+<table><tr><th>Tag key</th><th>Suggested values</th><th>Purpose</th><th>Status</th></tr>
+<tr><td><code>page_type</code></td><td>homepage, event_detail, utility, food_beverage, accessibility, mobile_app, mbs_express</td><td>Group pages by business purpose.</td><td><input type="checkbox"> Approved</td></tr>
+<tr><td><code>event_type</code></td><td>falcons, atlutd, concert, world_cup, other</td><td>Compare event-page behavior by event category.</td><td><input type="checkbox"> Approved</td></tr>
+<tr><td><code>journey</code></td><td>parking, accessibility, food_beverage, map, app_download, mbs_express</td><td>Group fan task journeys.</td><td><input type="checkbox"> Approved</td></tr>
+<tr><td><code>language</code></td><td>en, es</td><td>Compare English and Spanish behavior if Spanish pages are in scope.</td><td><input type="checkbox"> Approved</td></tr>
+</table>
+<div class="callout">Microsoft documents custom tags as key-value pairs using <code>clarity("set", "key", "value");</code>. Do not pass personal information through custom tags.</div>
+</section>
+
+<section id="phase6"><h2>10. Phase 6 — First heatmap review</h2>
+<h3>Per-page review workflow</h3>
+<div class="checklist">
+<label><input type="checkbox">Open Clarity and go to Heatmaps.</label>
+<label><input type="checkbox">Enter or select the target page URL.</label>
+<label><input type="checkbox">Review mobile click map.</label>
+<label><input type="checkbox">Review mobile scroll map.</label>
+<label><input type="checkbox">Review desktop click map.</label>
+<label><input type="checkbox">Compare mobile and desktop behavior.</label>
+<label><input type="checkbox">Capture screenshot, export, or shared link as evidence.</label>
+<label><input type="checkbox">Document top three useful interactions.</label>
+<label><input type="checkbox">Document top three missed opportunities or friction points.</label>
+<label><input type="checkbox">Assign recommended actions.</label>
+</div>
+<h3>Finding template</h3>
+<table><tr><th>Field</th><th>Entry</th></tr>
+<tr><td>Finding title</td><td><input type="text"></td></tr>
+<tr><td>Page / URL</td><td><input type="text"></td></tr>
+<tr><td>Device</td><td><select><option>Mobile</option><option>Desktop</option><option>Tablet</option><option>Multiple</option></select></td></tr>
+<tr><td>Observation</td><td><textarea></textarea></td></tr>
+<tr><td>Why it matters</td><td><textarea></textarea></td></tr>
+<tr><td>Recommendation</td><td><textarea></textarea></td></tr>
+<tr><td>Owner</td><td><input type="text"></td></tr>
+<tr><td>Priority</td><td><select><option>High</option><option>Medium</option><option>Low</option><option>Defer</option></select></td></tr>
+<tr><td>Evidence link</td><td><input type="text"></td></tr>
+</table>
+</section>
+
+<section id="phase7"><h2>11. Phase 7 — Prioritize improvements</h2>
+<p>Score each finding. Higher scores should move faster.</p>
+<table><tr><th>Criteria</th><th>Question</th><th>Score 1–5</th></tr>
+<tr><td>Fan impact</td><td>Does this affect a critical event-day task?</td><td><input type="text"></td></tr>
+<tr><td>Operational impact</td><td>Could it reduce confusion, support needs, or event-day friction?</td><td><input type="text"></td></tr>
+<tr><td>Accessibility impact</td><td>Does it improve ADA/mobility or inclusive experience access?</td><td><input type="text"></td></tr>
+<tr><td>Revenue/conversion impact</td><td>Could it affect tickets, parking, app adoption, MBS Express, or F&B discovery?</td><td><input type="text"></td></tr>
+<tr><td>Effort</td><td>Is the update easy to implement?</td><td><input type="text"></td></tr>
+</table>
+<div class="callout done"><strong>Priority bands:</strong> 20–25 High; 14–19 Medium; 8–13 Low; 0–7 Defer.</div>
+</section>
+
+<section id="phase8"><h2>12. Phase 8 — Implement approved changes</h2>
+<div class="grid2">
+<div><h3>Technical checklist for Johnny</h3><div class="checklist">
+<label><input type="checkbox">Confirm approved recommendation.</label>
+<label><input type="checkbox">Confirm whether change affects one page or a template.</label>
+<label><input type="checkbox">Make update in the approved website system.</label>
+<label><input type="checkbox">QA on mobile and desktop.</label>
+<label><input type="checkbox">Confirm links and CTAs work.</label>
+<label><input type="checkbox">Confirm Clarity tracking still works.</label>
+<label><input type="checkbox">Publish through approved workflow.</label>
+<label><input type="checkbox">Add completion evidence.</label>
+</div></div>
+<div><h3>UX QA checklist for Roshni</h3><div class="checklist">
+<label><input type="checkbox">Review mobile layout.</label>
+<label><input type="checkbox">Review desktop layout.</label>
+<label><input type="checkbox">Confirm intended fan task is easier.</label>
+<label><input type="checkbox">Confirm CTA hierarchy is clear.</label>
+<label><input type="checkbox">Confirm content order is logical.</label>
+<label><input type="checkbox">Confirm accessibility content is easy to find.</label>
+<label><input type="checkbox">Confirm copy is clear and direct.</label>
+<label><input type="checkbox">Approve for post-change validation.</label>
+</div></div>
+</div>
+</section>
+
+<section id="phase9"><h2>13. Phase 9 — Before/after validation</h2>
+<div class="checklist">
+<label><input type="checkbox">Open the same page reviewed before implementation.</label>
+<label><input type="checkbox">Use the same device type as the original finding.</label>
+<label><input type="checkbox">Compare click behavior before and after.</label>
+<label><input type="checkbox">Compare scroll behavior before and after.</label>
+<label><input type="checkbox">Document result as Improved, Unchanged, Worse, or Inconclusive.</label>
+<label><input type="checkbox">Add unchanged/worse items back to the backlog.</label>
+</div>
+<table><tr><th>Page</th><th>Change made</th><th>Original issue</th><th>Validation result</th><th>Evidence</th></tr>
+<tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><select><option>Improved</option><option>Unchanged</option><option>Worse</option><option>Inconclusive</option></select></td><td><input type="text"></td></tr>
+<tr><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td><td><select><option>Improved</option><option>Unchanged</option><option>Worse</option><option>Inconclusive</option></select></td><td><input type="text"></td></tr>
+</table>
+</section>
+
+<section id="pages"><h2>14. Page-specific review guides</h2>
+<div class="card"><h3>Homepage</h3><p><a href="https://www.mercedesbenzstadium.com/">https://www.mercedesbenzstadium.com/</a></p><div class="checklist"><label><input type="checkbox">Are event CTAs receiving meaningful clicks?</label><label><input type="checkbox">Are Parking, Stadium Menus, Accessibility/Mobility, and Event Details visible and used?</label><label><input type="checkbox">Do users scroll to Falcons and Atlanta United modules?</label><label><input type="checkbox">Are food and beverage modules receiving interaction?</label></div></div>
+<div class="card"><h3>Event detail page</h3><p><a href="https://www.mercedesbenzstadium.com/events/fifa-world-cup-26-tm---spain-vs-saudi-arabia">https://www.mercedesbenzstadium.com/events/fifa-world-cup-26-tm---spain-vs-saudi-arabia</a></p><div class="checklist"><label><input type="checkbox">Are users selecting ticket/hospitality actions?</label><label><input type="checkbox">Are Directions, Stadium Menus, Accessibility/Mobility, and Parking found?</label><label><input type="checkbox">Are gate and event-start details visible early enough?</label><label><input type="checkbox">Are Bag Policy and Know Before You Go sections reached?</label></div></div>
+<div class="card"><h3>Parking and Transportation</h3><p><a href="https://www.mercedesbenzstadium.com/parking-and-transportation">https://www.mercedesbenzstadium.com/parking-and-transportation</a></p><div class="checklist"><label><input type="checkbox">Are users selecting MARTA, Purchase Parking, Lot Info, View Maps, or Rules?</label><label><input type="checkbox">Are rideshare details reached on mobile?</label><label><input type="checkbox">Are users comparing transportation options or dropping early?</label></div></div>
+<div class="card"><h3>Stadium Maps</h3><p><a href="https://www.mercedesbenzstadium.com/stadium-maps">https://www.mercedesbenzstadium.com/stadium-maps</a></p><div class="checklist"><label><input type="checkbox">Are users selecting View Map?</label><label><input type="checkbox">Are concourse tabs/links used?</label><label><input type="checkbox">Are accessible drop-off locations reached?</label><label><input type="checkbox">Are map images or labels being clicked even if not interactive?</label></div></div>
+<div class="card"><h3>Accessibility Services</h3><p><a href="https://www.mercedesbenzstadium.com/accessibility">https://www.mercedesbenzstadium.com/accessibility</a></p><div class="checklist"><label><input type="checkbox">Are users finding event-day text assistance?</label><label><input type="checkbox">Are users finding accessible ticketing, companion seating, relocations, storage, and parking?</label><label><input type="checkbox">Are contact actions obvious on mobile?</label></div></div>
+<div class="card"><h3>All Vendors</h3><p><a href="https://www.mercedesbenzstadium.com/all-vendors">https://www.mercedesbenzstadium.com/all-vendors</a></p><div class="checklist"><label><input type="checkbox">Are users selecting search?</label><label><input type="checkbox">Are category filters being used?</label><label><input type="checkbox">Are View Menu links being selected?</label><label><input type="checkbox">Are users searching by section number, food type, or vendor?</label></div></div>
+<div class="card"><h3>Mobile Apps</h3><p><a href="https://www.mercedesbenzstadium.com/mobile-apps">https://www.mercedesbenzstadium.com/mobile-apps</a></p><div class="checklist"><label><input type="checkbox">Are users selecting iOS/Android links?</label><label><input type="checkbox">Are users choosing the correct app?</label><label><input type="checkbox">Is the MBS app clearly positioned as the event-day resource?</label></div></div>
+<div class="card"><h3>MBS Express and Delta Fly-Through Lanes</h3><p><a href="https://www.mercedesbenzstadium.com/mbs-express">https://www.mercedesbenzstadium.com/mbs-express</a><br><a href="https://www.mercedesbenzstadium.com/labs/delta-fly-through-lanes">https://www.mercedesbenzstadium.com/labs/delta-fly-through-lanes</a></p><div class="checklist"><label><input type="checkbox">Are users selecting registration actions?</label><label><input type="checkbox">Are users scrolling to trust, benefits, and FAQ content?</label><label><input type="checkbox">Are sign-up CTAs repeated where users need them?</label></div></div>
+</section>
+
+<section id="evidence"><h2>15. Evidence log and work completed</h2>
+<p>Use this section to show completed work. Add links to screenshots, Clarity shared views, project tickets, Webflow publish records, or notes.</p>
+<table><tr><th>Date</th><th>Work completed</th><th>Owner</th><th>Evidence link</th><th>Status</th></tr>
+<tr><td><input type="text"></td><td><input type="text" value="Clarity project created"></td><td><input type="text"></td><td><input type="text"></td><td><input type="checkbox"> Done</td></tr>
+<tr><td><input type="text"></td><td><input type="text" value="Tracking installed"></td><td><input type="text"></td><td><input type="text"></td><td><input type="checkbox"> Done</td></tr>
+<tr><td><input type="text"></td><td><input type="text" value="Homepage heatmap reviewed"></td><td><input type="text"></td><td><input type="text"></td><td><input type="checkbox"> Done</td></tr>
+<tr><td><input type="text"></td><td><input type="text" value="Accessibility heatmap reviewed"></td><td><input type="text"></td><td><input type="text"></td><td><input type="checkbox"> Done</td></tr>
+<tr><td><input type="text"></td><td><input type="text" value="All Vendors heatmap reviewed"></td><td><input type="text"></td><td><input type="text"></td><td><input type="checkbox"> Done</td></tr>
+<tr><td><input type="text"></td><td><input type="text" value="Recommendations delivered"></td><td><input type="text"></td><td><input type="text"></td><td><input type="checkbox"> Done</td></tr>
+</table>
+<h3>Open issues / blockers</h3>
+<table><tr><th>Blocker</th><th>Impact</th><th>Owner</th><th>Status</th><th>Resolution</th></tr>
+<tr><td><input type="text" value="Governance approval pending"></td><td><input type="text" value="Cannot deploy or expand tracking"></td><td><input type="text"></td><td><select><option>Open</option><option>In progress</option><option>Resolved</option></select></td><td><input type="text"></td></tr>
+<tr><td><input type="text" value="Subdomain scope unclear"></td><td><input type="text" value="Parking analysis may be incomplete"></td><td><input type="text"></td><td><select><option>Open</option><option>In progress</option><option>Resolved</option></select></td><td><input type="text"></td></tr>
+</table>
+</section>
+
+<section id="refs"><h2>16. Sources and notes</h2>
+<ul class="refs">
+<li>Microsoft Learn — Clarity Overview: Clarity is a behavioral analytics tool with session recordings, heatmaps, event/funnel tracking, and Copilot summarization; Microsoft also notes Clarity should not be used on websites/apps targeting users under 18.</li>
+<li>Microsoft Learn — Heatmaps features: Heatmaps analyze aggregated user behavior; heatmaps require Clarity tracking code on pages; color scale shows hotter and colder interaction areas; heatmap data is retained up to 13 months; heatmaps are limited to up to 100,000 page views per heatmap.</li>
+<li>Microsoft Learn — Segments in Clarity: Segments save groups of filters and can be applied to filters and custom tags.</li>
+<li>Microsoft Learn — Custom tags in Clarity: Custom tags are customizable filters for recordings and heatmaps; the documented syntax is <code>clarity("set", "key", "value");</code>.</li>
+<li>Mercedes-Benz Stadium website pages reviewed: Homepage, Parking and Transportation, Stadium Maps, Guidelines, Accessibility, All Vendors, Mobile Apps, MBS Express, Delta Fly-Through Lanes, Privacy Policy, and a FIFA World Cup 26 event detail page.</li>
+<li>Internal AMBSE context: Digital platform documentation identifies mercedesbenzstadium.com as a managed web property and Webflow as the platform used to manage and maintain the MBS website.</li>
+</ul>
+</section>
+</main>
+</div>
+<button class="print" onclick="window.print()">Print / Save PDF</button>
+<script>
+const inputs=[...document.querySelectorAll('input[type="checkbox"]')];
+inputs.forEach((cb,i)=>{cb.dataset.id='cb_'+i; const saved=localStorage.getItem('mbs_clarity_'+cb.dataset.id); if(saved==='true') cb.checked=true; cb.addEventListener('change',()=>{localStorage.setItem('mbs_clarity_'+cb.dataset.id,cb.checked); update();});});
+function update(){const total=inputs.length, done=inputs.filter(x=>x.checked).length; document.getElementById('totalCount').textContent=total; document.getElementById('doneCount').textContent=done; document.getElementById('bar').style.width=(total?Math.round(done/total*100):0)+'%';}
+function clearChecks(){if(confirm('Reset all saved checkbox progress in this browser?')){inputs.forEach(cb=>{cb.checked=false; localStorage.removeItem('mbs_clarity_'+cb.dataset.id);}); update();}}
+update();
+</script>
+</body></html>
